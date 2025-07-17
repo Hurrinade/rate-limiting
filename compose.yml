@@ -1,0 +1,12 @@
+services:
+  dev-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    env_file: ../.env
+    volumes:
+      - ./server:/app/server
+      - /app/server/node_modules
+    command: sh -c "pnpm run dev"
