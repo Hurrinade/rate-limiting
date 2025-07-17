@@ -1,5 +1,6 @@
 services:
   dev-server:
+    container_name: dev-server
     build:
       context: ./server
       dockerfile: Dockerfile

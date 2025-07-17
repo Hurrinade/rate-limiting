@@ -9,8 +9,8 @@ This is a full-stack rate limiting demonstration project. The application showca
 # 🚧 STILL IN WORK
 
 - server
-  - [x] Fixed limit windows with server timing (express-rate-limit)
-  - [] Fixes limit windows with user defined start
+  - [x] Fixed limit windows with server timing
+  - [x] Fixes limit windows with user initiated start (express-rate-limit)
   - [] Sliding limit windows
   - [] Floating limit window
   - [] Bucket limiting
@@ -27,6 +27,10 @@ This is a full-stack rate limiting demonstration project. The application showca
 Problem:
 
 - if user spams all his requests at the end of first time windows and start of the second window, he sent double amount of requests in very short time which can be very vulnerable
+
+2. **Fixed limit windows with user initiated timing**
+
+- TODO: docs
 
 ## Tech Stack
 
@@ -53,6 +57,7 @@ Libraries:
 ## Features
 
 - **Fixed limit windows with server timing**: Server defined timewindows for limiting
+- **Fixed limit windows with user initiated timing**: User initiated timewindows for limiting
 - **Type Safety**: Full TypeScript implementation across frontend and backend
 - **Containerized Environment**: Docker setup for easy development and deployment
 
