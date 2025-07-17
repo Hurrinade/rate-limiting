@@ -23,14 +23,20 @@ This is a full-stack rate limiting demonstration project. The application showca
 
 - this is very simple aproach which creates fixed timewindow on server which resets requests receieved counter every n (minutes, seconds, days...)
 - user is sending requests which are counted in each window, if user reaches request limit all other requests are blocked until specified time window ends
+- key for user tracking is ip adress
 
-Problem:
+  Problem:
 
-- if user spams all his requests at the end of first time windows and start of the second window, he sent double amount of requests in very short time which can be very vulnerable
+  - if user spams all his requests at the end of first time windows and start of the second window, he sent double amount of requests in very short time which can be very vulnerable
 
 2. **Fixed limit windows with user initiated timing**
 
-- TODO: docs
+- another simple fixed aproach which start window for limiting when user sends his first request, window is lasting for n (minutes, seconds, days...) and once it expires user can initiate new window limit which will again count number of requests
+- key for user tracking is ip adress
+
+  Problem:
+
+  - user can initiate window with one request, wait until window endtime and spam rest of the requests as well as new window requests right away which can again be very vulerable
 
 ## Tech Stack
 
@@ -47,7 +53,7 @@ Problem:
 
 Libraries:
 
-- express-rate-limit - for simplest rate limitng technique
+- express-rate-limit - for simplest user initiated limiting technique
 
 ### Infrastructure
 
@@ -56,8 +62,8 @@ Libraries:
 
 ## Features
 
-- **Fixed limit windows with server timing**: Server defined timewindows for limiting
-- **Fixed limit windows with user initiated timing**: User initiated timewindows for limiting
+- **Fixed limit windows with server timing**: Server defined time windows for limiting
+- **Fixed limit windows with user initiated timing**: User initiated time windows for limiting
 - **Type Safety**: Full TypeScript implementation across frontend and backend
 - **Containerized Environment**: Docker setup for easy development and deployment
 
@@ -72,11 +78,14 @@ Two files:
 Content:
 
 ```bash
-# development
 # Server port
 PORT=3000
 # Server env
 NODE_ENV=development
+# Time window in which requests will be tracked
+TIME_WINDOW=15000 # 15 seconds, set in miliseconds
+# Number of reuqests per time window
+REQUESTS_LIMIT=10
 ```
 
 ### Start application
